@@ -2,8 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AddTaskScreen extends StatelessWidget {
+  final Function addTaskCallback;
+
+  AddTaskScreen(this.addTaskCallback);
   @override
   Widget build(BuildContext context) {
+    String? newTaskTitle;
+
     return SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.all(50.0),
@@ -31,12 +36,14 @@ class AddTaskScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                onChanged: (newText) {
+                  newTaskTitle = newText;
+                },
               ),
               SizedBox(
                 height: 25.0,
               ),
               FlatButton(
-                onPressed: () {},
                 color: Colors.lightBlue,
                 child: Text(
                   'Add',
@@ -44,7 +51,10 @@ class AddTaskScreen extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-              )
+                onPressed: () {
+                  addTaskCallback(newTaskTitle);
+                },
+              ),
             ],
           ),
         ),
